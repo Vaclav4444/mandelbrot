@@ -52,6 +52,17 @@ Complex add(Complex a, Complex b){
     return end;
 }
 
+/*									equals									---------------------------------- new
+bool equals(Complex a, Complex b){
+	if(a.real()==b.real()){
+		if(a.imaginary()==b.imaginary()){
+			return True;
+		}
+	}
+	return False
+}
+*/
+
 float displayToMath(float screenSize, float mathSize, float dispCoord, float screenDisplacement){
     //y je invers
     float out = 0;
@@ -108,7 +119,7 @@ int main(int argc, char** argv){
 
             for(int x = 0;x<screenSize_x;x++){
                 for(int y = 0; y < screenSize_y;y++){
-                    c.re=((x-screenSize_x/2)/(100.0*zoom))-xshift;/*xshift*/
+                  c.re=((x-screenSize_x/2)/(100.0*zoom))-xshift;/*xshift*/
                     c.im=((y-screenSize_y/2)/(100.0*zoom))-yshift;
                     z.re=c.re;
                     z.im=c.im;
@@ -116,6 +127,13 @@ int main(int argc, char** argv){
                     end=0;
                     for(int i = 0; i < iterations; i++){
                         z=add(mult(z,z),c);
+                        
+                        /*	basic loop detection								---------------------------new
+						            if(equals(z,c)){
+						          	break;
+						            }
+						            */
+                      
                         if(z.abs()>4){
                         end=i;
                         break;
@@ -125,6 +143,14 @@ int main(int argc, char** argv){
 
                     barva(sin(end*r)*255,sin(end*g)*255,sin(end*b)*255);
 
+
+                  // TODO HSV
+					
+					/*
+					
+					
+					
+					*/
                     /*if(z.abs()>2){
                         barva(CERNA);
                     }else{
